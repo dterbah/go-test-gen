@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
@@ -22,4 +23,13 @@ func Execute() {
 }
 
 func init() {
+	// init logger
+	// Configuration de Logrus
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp:          true,
+		ForceColors:            true,
+		DisableTimestamp:       true,
+		DisableLevelTruncation: true,
+	})
+	logrus.SetLevel(logrus.InfoLevel)
 }

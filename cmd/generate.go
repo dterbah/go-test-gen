@@ -3,6 +3,9 @@ package cmd
 import (
 	"fmt"
 
+	gcore "github.com/dterbah/go-test-gen/core"
+	file "github.com/dterbah/go-test-gen/utils"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
@@ -15,11 +18,19 @@ var generateCmd = &cobra.Command{
 	Long: `Generate unit tests for the specified Go project.
 You need to provide the path to the project using the --project flag.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(args)
+		var testGenerator *gcore.TestGenerator
 		if projectPath == "" {
-			fmt.Println("Please provide the path to the project using the --project flag.")
+			logrus.Error("Please provide the path to the project using the --project flag.")
 		} else {
-			fmt.Printf("Generating tests for project at: %s\n", projectPath)
-			// Ajoutez ici la logique pour générer les tests
+			logrus.Infof("Generating tests for project at: %s", projectPath)
+
+			if exists, _ := file.Exists(projectPath); !exists {
+				logrus.Errorf("The project path %s doesn't exists", projectPath)
+				return
+			}
+			testGenerator = gcore.NewTestGenerator(projectPath)
+			fmt.Print(testGenerator)
 		}
 	},
 }
