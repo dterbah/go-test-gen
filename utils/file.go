@@ -7,6 +7,7 @@ import (
 )
 
 const GOLANG_FILE_EXTENSION = ".go"
+const TEST_EXTENSION = "_test"
 
 /*
 Check if a path is corresponding to a file or dir
@@ -39,7 +40,7 @@ func IsDir(path string) bool {
 Return true if the path has the golang extension, else false
 */
 func IsGoFile(path string) bool {
-	return strings.HasSuffix(path, GOLANG_FILE_EXTENSION)
+	return strings.HasSuffix(path, GOLANG_FILE_EXTENSION) && !strings.Contains(path, TEST_EXTENSION)
 }
 
 /*
@@ -54,7 +55,7 @@ func ReadFile(path string) (string, error) {
 	return string(content), nil
 }
 
-func CreateTestFile(path string) string {
+func CreateTestFilePath(path string) string {
 	index := strings.Index(path, GOLANG_FILE_EXTENSION)
 	filename := fmt.Sprintf("%s_test%s", path[:index], GOLANG_FILE_EXTENSION)
 	return filename

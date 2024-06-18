@@ -33,6 +33,8 @@ Generate tests for the project path
 */
 func (generator *TestGenerator) GenerateTests() {
 	generator.generateTestsForDir(generator.rootPath)
+
+	logrus.Infof("✅ Test generation finished ! Files created %d, files updated %d", generator.filesCreated, generator.filesUpdated)
 }
 
 // ---- Private methods ---- //
@@ -52,7 +54,7 @@ func (generator *TestGenerator) generateTestsForDir(dir string) {
 	}
 
 	goFiles := arraylist.New(nil, entries...).Filter(func(element fs.DirEntry) bool {
-		return file.IsGoFile(element.Name())
+		return file.IsGoFile(element.Name()) || element.IsDir()
 	})
 
 	goFiles.ForEach(func(element fs.DirEntry, index int) {
@@ -71,5 +73,9 @@ Generate test for a file
 func (generator *TestGenerator) generateTestsForFile(path string) {
 	logrus.Infof("🚀 Generating test for file %s ...", path)
 	fileTest := testfile.NewFileTest(path)
-	fileTest.GenerateTests()
+	status := fileTest.GenerateTests()
+
+	if status == testfile.Created {
+		generator.filesCreated++
+	}
 }
