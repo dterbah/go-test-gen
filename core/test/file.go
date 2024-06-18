@@ -78,7 +78,7 @@ func (fileTest FileTest) writeTests() FileTestStatus {
 
 	fileTest.functions.ForEach(func(function string, index int) {
 		testFunctionContent := getTestFunctionContent(function)
-		testFileContent = fmt.Sprintf("%s\n%s", testFileContent, testFunctionContent)
+		testFileContent = fmt.Sprintf("%s\n%s\n", testFileContent, testFunctionContent)
 	})
 
 	// write new file content in the file test
