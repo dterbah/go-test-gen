@@ -22,7 +22,7 @@ You need to provide the path to the project using the --project flag.`,
 		} else {
 			logrus.Infof("Generating tests for project at: %s", projectPath)
 
-			if exists, _ := file.Exists(projectPath); !exists {
+			if exists := file.Exists(projectPath); !exists {
 				logrus.Errorf("The project path %s doesn't exists", projectPath)
 				return
 			}
