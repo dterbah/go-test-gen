@@ -77,5 +77,7 @@ func (generator *TestGenerator) generateTestsForFile(path string) {
 
 	if status == testfile.Created {
 		generator.filesCreated++
+	} else if status == testfile.Updated {
+		generator.filesUpdated++
 	}
 }
