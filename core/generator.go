@@ -64,11 +64,18 @@ func (generator *TestGenerator) generateTestsForDir(dir string) {
 	})
 
 	goFiles.ForEach(func(element fs.DirEntry, index int) {
-		currentPath := path.Join(dirPath, element.Name())
+		name := element.Name()
+		currentPath := path.Join(dirPath, name)
 		if element.IsDir() {
 			generator.generateTestsForDir(currentPath)
 		} else {
-			generator.generateTestsForFile(currentPath)
+			// check if we should include this file
+			shouldInclude := generator.shouldIncludeFile(name)
+			if !shouldInclude {
+				logrus.Infof("🟠 %s ignored !", name)
+			} else {
+				generator.generateTestsForFile(currentPath)
+			}
 		}
 	})
 }
@@ -86,4 +93,19 @@ func (generator *TestGenerator) generateTestsForFile(path string) {
 	} else if status == testfile.Updated {
 		generator.filesUpdated++
 	}
+}
+
+/*
+Verify if a filename should be included during the tests generation.
+Return true if at least one rule is verified, else false
+*/
+func (generator TestGenerator) shouldIncludeFile(filename string) bool {
+	for _, excludeFileRegex := range generator.config.ExcludeFiles {
+		matched, _ := filepath.Match(excludeFileRegex, filename)
+		if matched {
+			return false
+		}
+	}
+
+	return true
 }
