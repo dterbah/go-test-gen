@@ -15,3 +15,7 @@ func AddTest(t *testing.T) {
 func AddFloatTest(t *testing.T) {
 	// todo implement
 }
+
+func privateAddTest(t *testing.T) {
+	// todo implement 
+}

@@ -30,6 +30,7 @@ func init() {
 		ForceColors:            true,
 		DisableTimestamp:       true,
 		DisableLevelTruncation: true,
+		PadLevelText:           true,
 	})
 	logrus.SetLevel(logrus.InfoLevel)
 }

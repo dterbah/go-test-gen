@@ -91,7 +91,7 @@ Generate test for a file
 func (generator *TestGenerator) generateTestsForFile(path string) {
 	logrus.Infof("🚀 Generating tests for file %s ...", path)
 	fileTest := testfile.NewFileTest(path)
-	status := fileTest.GenerateTests()
+	status := fileTest.GenerateTests(generator.config.GeneratePrivateFunctions)
 
 	if status == testfile.Created {
 		generator.filesCreated++

@@ -1,4 +1,5 @@
 {
   "generatePrivateFunctions": false,
-  "excludeFiles": ["main.*"]
+  "excludeFiles": ["main.*"],
+  "generatePrivateFunctions": true
 }
