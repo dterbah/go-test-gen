@@ -19,13 +19,19 @@ type TestGenerator struct {
 	testFiles    list.List[string]
 	filesCreated int
 	filesUpdated int
+	config       TestGeneratorConfig
 }
 
 /*
 Create a new Test Generator
 */
 func NewTestGenerator(rootPath string) TestGenerator {
-	return TestGenerator{rootPath: rootPath, testFiles: arraylist.New(comparator.StringComparator)}
+	config := LoadTestGeneratorConfig(rootPath)
+	return TestGenerator{
+		rootPath:  rootPath,
+		testFiles: arraylist.New(comparator.StringComparator),
+		config:    config,
+	}
 }
 
 /*
@@ -34,7 +40,7 @@ Generate tests for the project path
 func (generator *TestGenerator) GenerateTests() {
 	generator.generateTestsForDir(generator.rootPath)
 
-	logrus.Infof("✅ Test generation finished ! Files created %d, files updated %d", generator.filesCreated, generator.filesUpdated)
+	logrus.Infof("✅ Tests generation finished ! Files created %d, files updated %d", generator.filesCreated, generator.filesUpdated)
 }
 
 // ---- Private methods ---- //
@@ -71,7 +77,7 @@ func (generator *TestGenerator) generateTestsForDir(dir string) {
 Generate test for a file
 */
 func (generator *TestGenerator) generateTestsForFile(path string) {
-	logrus.Infof("🚀 Generating test for file %s ...", path)
+	logrus.Infof("🚀 Generating tests for file %s ...", path)
 	fileTest := testfile.NewFileTest(path)
 	status := fileTest.GenerateTests()
 
