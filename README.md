@@ -1,5 +1,7 @@
 ## Go Test Generator (AKA go-test-gen)
 
+![Logo](assets/go-gen-test-logo.png)
+
 This CLI has to create automatically tests for your Golang project.
 
 ![CI](https://github.com/dterbah/go-test-gen/actions/workflows/go-test.yml/badge.svg)
