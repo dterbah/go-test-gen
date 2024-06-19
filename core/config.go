@@ -9,7 +9,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const GO_TEST_GEN_CONFIG_NAME = ".go-gen-test.json"
+const GO_TEST_GEN_CONFIG_NAME = ".go-test-gen.json"
 
 type TestGeneratorConfig struct {
 	GeneratePrivateFunctions bool     `json:"generatePrivateFunctions"`

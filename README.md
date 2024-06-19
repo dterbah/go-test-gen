@@ -28,3 +28,17 @@ The command to generate test of your project is the following one :
     # or
     go-test-gen generate -p="/path/to/golang/project"
 ```
+
+This command will automatically create tests for all your .go files. If a test
+already exists for a file, it will take all the current content of your file and
+update it with the missing tests.
+
+## Configuration of CLI
+
+You can configure the CLI via a `.go-test-gen.json` in the root of your project. Here are the different options you can use :
+
+| Option                   | Type       | Description                                                                                                  |
+| ------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------ |
+| generatePrivateFunctions | `bool`     | Defines if the CLI has to create tests for private functions                                                 |
+| generateEmptyTests       | `bool`     | Defines if the CLI has to create file tests for empty go files or go files without any functions             |
+| excludeFiles             | `[]string` | Defines files to that not need to have attached test. For example, you can have `["main.go", "*_config.go"]` |
