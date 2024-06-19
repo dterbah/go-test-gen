@@ -37,8 +37,9 @@ update it with the missing tests.
 
 You can configure the CLI via a `.go-test-gen.json` in the root of your project. Here are the different options you can use :
 
-| Option                   | Type       | Description                                                                                                  |
-| ------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| generatePrivateFunctions | `bool`     | Defines if the CLI has to create tests for private functions                                                 |
-| generateEmptyTests       | `bool`     | Defines if the CLI has to create file tests for empty go files or go files without any functions             |
-| excludeFiles             | `[]string` | Defines files to that not need to have attached test. For example, you can have `["main.go", "*_config.go"]` |
+| Option                   | Type       | Description                                                                                                  | Default value |
+| ------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------ | ------------- |
+| generatePrivateFunctions | `bool`     | Defines if the CLI has to create tests for private functions                                                 | `false`       |
+| generateEmptyTests       | `bool`     | Defines if the CLI has to create file tests for empty go files or go files without any functions             | `false`       |
+| excludeFiles             | `[]string` | Defines files to that not need to have attached test. For example, you can have `["main.go", "*_config.go"]` | `[]`          |
+| verbose                  | `bool`     | If this option is false, you will have few logs messages                                                     | true          |

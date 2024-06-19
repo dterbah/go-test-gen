@@ -27,6 +27,10 @@ Create a new Test Generator
 */
 func NewTestGenerator(rootPath string) TestGenerator {
 	config := LoadTestGeneratorConfig(rootPath)
+	if !config.Verbose {
+		logrus.SetLevel(logrus.PanicLevel)
+	}
+
 	return TestGenerator{
 		rootPath:  rootPath,
 		testFiles: arraylist.New(comparator.StringComparator),
@@ -39,7 +43,8 @@ Generate tests for the project path
 */
 func (generator *TestGenerator) GenerateTests() {
 	generator.generateTestsForDir(generator.rootPath)
-
+	// reset the log level
+	logrus.SetLevel(logrus.TraceLevel)
 	logrus.Infof("✅ Tests generation finished ! Files created %d, files updated %d", generator.filesCreated, generator.filesUpdated)
 }
 
