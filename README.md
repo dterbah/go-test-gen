@@ -1,6 +1,6 @@
 ## Go Test Generator (AKA go-test-gen)
 
-This CLI enables to create automatically tests for your Golang projects.
+This CLI enables to create automatically tests skeletons for your Golang projects.
 
 ![CI](https://github.com/dterbah/go-test-gen/actions/workflows/go-test.yml/badge.svg)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=dterbah_go-test-gen&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=dterbah_go-test-gen)
@@ -12,10 +12,10 @@ This CLI enables to create automatically tests for your Golang projects.
 
 ## Installation
 
-To install this CLI in your environment, you can use the following command :
+To install this CLI in your global environment, you can use the following command :
 
 ```bash
-    go get github.com/dterbah/go-test-gen
+    go install github.com/dterbah/go-test-gen
 ```
 
 ## Usages
@@ -23,16 +23,22 @@ To install this CLI in your environment, you can use the following command :
 The command to generate test of your project is the following one :
 
 ```bash
+    # Create tests skeleton for a project
     go-test-gen generate --project="/path/to/golang/project"
     # or
     go-test-gen generate -p="/path/to/golang/project"
+
+    # Create tests for a single go file
+    go-test-gen generate --file="path/to/file"
+    # or
+    go-test-gen generate -f="path/to/file"
 ```
 
 This command will automatically create tests for all your .go files. If a test
 already exists for a file, it will take all the current content of your file and
 update it with the missing tests.
 
-## Configuration of CLI
+## Configuration of CLI (for project)
 
 You can configure the CLI via a `.go-test-gen.json` in the root of your project. Here are the different options you can use :
 
