@@ -6,6 +6,7 @@ import (
 	"path"
 	"path/filepath"
 
+	"github.com/dterbah/go-test-gen/core/config"
 	testfile "github.com/dterbah/go-test-gen/core/test"
 	file "github.com/dterbah/go-test-gen/utils"
 	"github.com/dterbah/gods/list"
@@ -14,24 +15,28 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type TestGenerator struct {
+/*
+Represents a project test generator
+*/
+type ProjectTestGenerator struct {
+	BaseTestGenerator
 	rootPath     string
 	testFiles    list.List[string]
 	filesCreated int
 	filesUpdated int
-	config       TestGeneratorConfig
+	config       config.TestGeneratorConfig
 }
 
 /*
 Create a new Test Generator
 */
-func NewTestGenerator(rootPath string) TestGenerator {
-	config := LoadTestGeneratorConfig(rootPath)
+func NewProjectTestGenerator(rootPath string) *ProjectTestGenerator {
+	config := config.LoadTestGeneratorConfig(rootPath)
 	if !config.Verbose {
 		logrus.SetLevel(logrus.PanicLevel)
 	}
 
-	return TestGenerator{
+	return &ProjectTestGenerator{
 		rootPath:  rootPath,
 		testFiles: arraylist.New(comparator.StringComparator),
 		config:    config,
@@ -41,7 +46,7 @@ func NewTestGenerator(rootPath string) TestGenerator {
 /*
 Generate tests for the project path
 */
-func (generator *TestGenerator) GenerateTests() {
+func (generator *ProjectTestGenerator) GenerateTests() {
 	generator.generateTestsForDir(generator.rootPath)
 	// reset the log level
 	logrus.SetLevel(logrus.TraceLevel)
@@ -53,7 +58,7 @@ func (generator *TestGenerator) GenerateTests() {
 /*
 Generate tests for a specific directory
 */
-func (generator *TestGenerator) generateTestsForDir(dir string) {
+func (generator *ProjectTestGenerator) generateTestsForDir(dir string) {
 	entries, err := os.ReadDir(dir)
 	dirPath, _ := filepath.Abs(dir)
 
@@ -88,7 +93,7 @@ func (generator *TestGenerator) generateTestsForDir(dir string) {
 /*
 Generate test for a file
 */
-func (generator *TestGenerator) generateTestsForFile(path string) {
+func (generator *ProjectTestGenerator) generateTestsForFile(path string) {
 	logrus.Infof("🚀 Generating tests for file %s ...", path)
 	fileTest := testfile.NewFileTest(path)
 	status := fileTest.GenerateTests(generator.config.GeneratePrivateFunctions)
@@ -104,7 +109,7 @@ func (generator *TestGenerator) generateTestsForFile(path string) {
 Verify if a filename should be included during the tests generation.
 Return true if at least one rule is verified, else false
 */
-func (generator TestGenerator) shouldIncludeFile(filename string) bool {
+func (generator ProjectTestGenerator) shouldIncludeFile(filename string) bool {
 	for _, excludeFileRegex := range generator.config.ExcludeFiles {
 		matched, _ := filepath.Match(excludeFileRegex, filename)
 		if matched {

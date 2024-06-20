@@ -109,6 +109,7 @@ func (fileTest FileTest) writeTests() FileTestStatus {
 	// write new file content in the file test
 
 	file, err := os.OpenFile(fileTestPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
 	if err != nil {
 		logrus.Errorf("Error when opening file %s", fileTestPath)
 	}

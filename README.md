@@ -3,7 +3,6 @@
 This CLI enables to create automatically tests for your Golang projects.
 
 ![CI](https://github.com/dterbah/go-test-gen/actions/workflows/go-test.yml/badge.svg)
-[![codecov](https://codecov.io/gh/dterbah/go-test-gen/branch/main/graph/badge.svg)](https://codecov.io/gh/dterbah/go-test-gen)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=dterbah_go-test-gen&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=dterbah_go-test-gen)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dterbah_go-test-gen&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=dterbah_go-test-gen)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=dterbah_go-test-gen&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=dterbah_go-test-gen)
@@ -42,4 +41,4 @@ You can configure the CLI via a `.go-test-gen.json` in the root of your project.
 | generatePrivateFunctions | `bool`     | Defines if the CLI has to create tests for private functions                                                 | `false`       |
 | generateEmptyTests       | `bool`     | Defines if the CLI has to create file tests for empty go files or go files without any functions             | `false`       |
 | excludeFiles             | `[]string` | Defines files to that not need to have attached test. For example, you can have `["main.go", "*_config.go"]` | `[]`          |
-| verbose                  | `bool`     | If this option is false, you will have few logs messages                                                     | `true`        |
+| verbose                  | `bool`     | If this option is false, you will have less logs than usually                                                | `true`        |
