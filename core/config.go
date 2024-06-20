@@ -34,7 +34,7 @@ func LoadTestGeneratorConfig(path string) TestGeneratorConfig {
 		file, err := os.Open(configPath)
 		if err != nil {
 			logrus.Error("Error when opening the config file")
-			return defaultConfig
+			return config
 		}
 
 		defer file.Close()
