@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"unicode"
 
 	file "github.com/dterbah/go-test-gen/utils"
 	"github.com/dterbah/gods/list"
@@ -147,7 +148,17 @@ func getTestFunctionContent(function string) string {
 Return test function name according tp his original name
 */
 func getTestFunctionName(function string) string {
-	return fmt.Sprintf("%s%s", TEST_FUNCTION_EXTENSION, function)
+	// Convert string to rune slice to handle Unicode characters correctly
+	rs := []rune(function)
+
+	// Check if the first rune is a letter
+	if unicode.IsLetter(rs[0]) {
+		// Convert first rune to upper case
+		rs[0] = unicode.ToUpper(rs[0])
+	}
+
+	functionUpperCase := string(rs)
+	return fmt.Sprintf("%s%s", TEST_FUNCTION_EXTENSION, functionUpperCase)
 }
 
 /*
