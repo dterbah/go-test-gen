@@ -147,7 +147,7 @@ func getTestFunctionContent(function string) string {
 Return test function name according tp his original name
 */
 func getTestFunctionName(function string) string {
-	return fmt.Sprintf("%s%s", function, TEST_FUNCTION_EXTENSION)
+	return fmt.Sprintf("%s%s", TEST_FUNCTION_EXTENSION, function)
 }
 
 /*
