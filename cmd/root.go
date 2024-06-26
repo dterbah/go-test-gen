@@ -46,5 +46,5 @@ func init() {
 	logrus.SetLevel(logrus.InfoLevel)
 
 	rootCmd.Flags().BoolVarP(&showVersion, "version", "v", false, "Show version")
-	version = "1.0.1"
+	version = "1.0.3"
 }
