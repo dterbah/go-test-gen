@@ -8,7 +8,7 @@ This CLI enables to create automatically tests skeletons for your Golang project
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=dterbah_go-test-gen&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=dterbah_go-test-gen)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dterbah_go-test-gen&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=dterbah_go-test-gen)
 
-<img src="assets/logo.png" width="100" />
+<img src="assets/logo.webp" width="100" />
 
 ## Installation
 
